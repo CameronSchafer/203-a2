@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<!--"Login" page of FlowerShop.
+    Please refer back to this page for any comments on the main structure of the site
+    Refer to order.html for comments on pages using forms
+    All flower details and flower pictures are referenced in catalog.xml
+
+    In addition to HTML5 changes, nav bar changes, and right side changes, this page as been further modified as such:
+    - removed dummy text, added more descriptive text
+    - upgraded to HTML5 form, and used fieldsets rather than divs for structuring content
+    - upgraded to HTML5 input fields, with restrictions where possible (i.e type="email"), and autocomplete ability
+    - added label attribute "for" to specify which input field they label-->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Flower Shop</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+
+<body>
+
+    <div id="wrap">
+
+        <header>
+
+            <div class="logo">
+                <a href="ass1.html">
+                    <img src="images/logo.gif" alt="" title="" style="border:0" />
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="ass1.html">home</a></li>
+                    <li><a href="about.html">about us</a></li>
+                    <li><a href="category.html">flowers</a></li>
+                    <li class="selected"><a href="myaccount.html">my account</a></li>
+                    <li><a href="register.html">register</a></li>
+                    <li><a href="contact.html">contact</a></li>
+                    <li><a href="search.html">search</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <main>
+
+            <div class="left_content">
+
+                <div class="title">
+                    <span class="title_icon">
+                        <img src="images/bullet1.gif" alt="" title="" />
+                    </span>My account
+                </div>
+
+                <div class="feat_prod_box_details">
+
+                    <p class="details">
+                        Log into your account view your past orders, or to place new orders without filling out those pesky forms!
+                    </p>
+
+                    <form name="register" action="#">
+                        <fieldset class="form_box">
+                            <legend class="form_subtitle">login into your account</legend>
+                                <div class="form_row">
+                                    <label class="form_field" for="loginUsername"><strong>Username</strong></label>
+                                    <input type="text" class="form_field_input" id="loginUsername" autocomplete="username" required/>
+                                </div>
+
+
+                                <div class="form_row">
+                                    <label class="form_field" for="loginPassword"><strong>Password</strong></label>
+                                    <input type="password" class="form_field_input" id="loginPassword" autocomplete="current-password" required/>
+                                </div>
+
+                                <div class="form_row">
+                                    <label class="form_checkbox" for="loginRememberDetails">
+                                        <input type="checkbox" name="terms" id="loginRememberDetails"> Remember me
+                                    </label>
+                                </div>
+
+
+                                <div class="form_row">
+                                    <input type="submit" class="form_submit" value="login" />
+                                </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+            <!--end of left content-->
+
+            <div class="right_content">
+
+                <div class="languages_box">
+                    <span class="red">Languages:</span>
+                    <a href="#">
+                        <img src="images/au.gif" alt="" title="" style="border: 0; height:12px; width:15px;" />
+                    </a>
+                </div>
+
+                <div class="currency">
+                    <span class="red">Currency: </span>
+                    <a href="#" class="selected">AUD</a>
+                </div>
+
+                <div class="cart">
+                    <div class="title">
+                        <span class="title_icon">
+                                <img src="images/cart.gif" alt="" title="" />
+                        </span>My cart
+                    </div>
+
+                    <div class="home_cart_content">
+                        3 x items | <span class="red">TOTAL: 100$</span>
+                    </div>
+                    <div class="cart_actions">
+                        <a href="cart.html" class="view_cart">view cart</a>
+                        <a href="order.html" class="place_order">place order</a>
+                    </div>
+                </div>
+
+                <div class="title">
+                    <span class="title_icon">
+                            <img src="images/bullet3.gif" alt="" title="" />
+                    </span>About Our Shop
+                </div>
+
+                <div class="about">
+                    <p>
+                        <img src="images/about.gif" alt="" title="" class="right" /> Flowershop has quickly become renowned
+                        as one of Geelong's most prestigious and luxurious retail flower stores, and this has been successfully
+                        translated to our online flower shop. The same service, quality and range we provide to our retail
+                        shoppers is also extended to our online community.
+                        <!-- reference: Flower Temple, availalbe at <http://www.flowertemple.com.au/aboutflowertemple.aspx>, accessed 09/07/2013)-->
+                    </p>
+                </div>
+
+                <div class="right_box">
+
+                    <div class="title">
+                        <span class="title_icon">
+                                <img src="images/bullet5.gif" alt="" title="" />
+                        </span>Categories
+                    </div>
+
+                    <ul class="list">
+                        <li><a href="category.html">Flowers</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <!--end of right content-->
+
+            <div class="clear"></div>
+
+        </main>
+        <!--end of main-->
+
+        <footer>
+
+            <div class="left_footer">
+                <img src="images/footer_logo.gif" alt="" title="" /><br />
+                <a href="http://csscreme.com/freecsstemplates/" title="free templates">
+                    <img src="images/csscreme.gif" alt="free templates" title="free templates" style="border:0" />
+                </a>
+            </div>
+
+            <div class="right_footer">
+                <a href="ass1.html">home</a>
+                <a href="about.html">about us</a>
+                <a href="category.html">flowers</a>
+                
+                <a href="contact.html">contact us</a>
+            </div>
+
+            <aside id="deakinDisclaimer">
+            ©Deakin University, School of Information Technology. This web page has been developed as a student assignment for the unit SIT203: Web Programming. Therefore it is not part of the University's authorised web site. DO NOT USE THE INFORMATION CONTAINED ON THIS WEB PAGE IN ANY WAY.
+            </aside>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

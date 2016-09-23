@@ -1,0 +1,64 @@
+﻿CREATE TABLE plants(
+ID NUMBER NOT NULL,
+featured VARCHAR2(5),
+new VARCHAR2(5),
+common VARCHAR2(50),
+botan VARCHAR2(50),
+price NUMBER,
+picture VARCHAR2(50),
+descrip VARCHAR2(200),
+lightlevels VARCHAR2(30),
+seasons VARCHAR2(20),
+zone VARCHAR2(20),
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE customers(
+ID NUMBER NOT NULL,
+username VARCHAR2(50) NOT NULL,
+password VARCHAR2(50) NOT NULL,
+email VARCHAR2(50) NOT NULL,
+phone VARCHAR2(50),
+company VARCHAR2(50),
+address VARCHAR2(100),
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE orders(
+ID NUMBER NOT NULL,
+date_time VARCHAR(20),
+customer NUMBER,
+paid NUMBER,
+PRIMARY KEY(ID),
+FOREIGN KEY(customer) REFERENCES CUSTOMERS(ID)
+);
+
+INSERT INTO plants VALUES(1,'false','true','Bloodroot','Sanguinaria canadensis',8.80,'Bloodroot.jpg','The Bloodroot, a perennial plant, is one of the earliest and most beautiful spring flowers.','Full Sun','Any','3 to 9'); 
+Description found: http://www.botanical.com/botanical/mgmh/b/bloodr59.html
+
+INSERT INTO plants VALUES(2,'false','false','Columbine','Aquilegia canadensis',7.90,'Columbine.jpg','With beautiful bell-shaped flowers, columbine is an excellent garden perennial with many colorful hybrid varieties to choose from.','Part Shade','Any','3 to 8'); 
+Description found: http://garden.org/learn/articles/view/3373/
+
+INSERT INTO plants VALUES(3,'false','true','Marsh Marigold','Caltha palustris',9.90,'Marsh.jpg','Marsh Marigold is one of the most cheerful native plants to adorn the edges of a pond or to grace rock crevices in or near waterfalls.','Part Shade','Any','2 to 9'); 
+Description found: http://iwgs.org/marsh-marigold/
+
+INSERT INTO plants VALUES(4,'false','false','Dutchmans-Breeches','Dicentra cucullaria',8.65,'Dutch.jpg','Dutchman’s-breeches, named for its sprays of yellow-tipped white flowers that resemble the wide-legged, traditional pantaloons worn by Dutch men.','Full Sun','Any','3 to 7'); 
+Description found: https://www.britannica.com/plant/Dutchmans-breeches
+
+INSERT INTO plants VALUES(5,'false','true','California Poppy','Eschscholzia californica',4.90,'Poppy.jpg','The California Poppy is a plant that brings a smile to the face whatever the weather or ones state of mind.','Part Shade','Any','8 to 10'); 
+Description found: http://www.telegraph.co.uk/gardening/howtogrow/3311595/How-to-grow-California-poppy.html
+
+INSERT INTO plants VALUES(6,'false','false','Hepatica','Hepatica americana',4.90,'Hepatica.jpg','Hepatica is one of the first flowers to appear in the spring while other wildflowers are still developing leaves.','Full Sun','Any','3 to 8');  
+Description found: http://www.gardeningknowhow.com/ornamental/flowers/hepatica/hepatica-wildflowers.htm
+
+INSERT INTO plants VALUES(7,'true','false','Cardinal Flower','Lobelia cardinalis',6.65,'Cardinal.jpg','A popular though short-lived perennial that produces a profusion of brilliant scarlet flowers atop 3- to 4-foot-tall plants.','Full Sun','Any','2 to 9'); 
+Description found: http://www.gardening.cornell.edu/homegardening/scenea5db.html
+
+INSERT INTO plants VALUES(8,'true','false','Rose','Rosa',9.90,'Rose.jpg','Roses are the perfect gift for any occassion.','Part Shade','Any','4 to 9'); 
+Description found: http://www.theflowerexpert.com/content/mostpopularflowers/rose
+
+INSERT INTO plants VALUES(9,'false','false','Woodland Phlox','Phlox divaricata',10.20,'Phlox.jpg','This is a very fragrant native woodland phlox with powder-blue flowers in spring. Reaching only 1 foot tall.','Part Shade','Any','3 to 8'); 
+Description found: http://www.finegardening.com/blue-phlox-phlox-divaricata-clouds-perfume
+
+INSERT INTO plants VALUES(10,'false','false','Kangaroo paw','Haemodoraceae',8.90,'Kangaroo.jpg','These perennial plants are noted for their unique bird attracting flowers.','Full Sun','Any','4 to 9'); 
+Description found: https://en.wikipedia.org/wiki/Kangaroo_paw

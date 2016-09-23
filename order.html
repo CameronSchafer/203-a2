@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<!--"Order" page of FlowerShop.
+    Please refer back to this page for any comments on the main structure of the site
+    Refer to order.html for comments on pages using forms
+    All flower details and flower pictures are referenced in catalog.xml
+
+    This page was created in accordance to specifications. It contains all of the changes done to the main template.-->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Flower Shop</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+
+<body>
+    
+    <div id="wrap">
+
+        <header>      
+            <div class="logo">
+                <a href="ass1.html">
+                    <img src="images/logo.gif" alt="" title="" style="border:0" />
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="ass1.html">home</a></li>
+                    <li><a href="about.html">about us</a></li>
+                    <li><a href="category.html">flowers</a></li>
+                    <li><a href="myaccount.html">my account</a></li>
+                    <li><a href="register.html">register</a></li>
+                    <li><a href="contact.html">contact</a></li>
+                    <li><a href="search.html">search</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="left_content">
+
+                <div class="title" >
+                    <span class="title_icon">
+                        <img src="images/bullet1.gif" alt="" title="" />
+                    </span>Order
+                </div>
+
+                <div class="feat_prod_box_details">
+                    <!--details paragraph describes the content of the section-->
+                    <p class="details">
+                        Enter your details to have our flowers sent to you in no time!<br/>
+                    </p>
+                    
+                    <!--forms are currently NOT FUNCTIONAL-->
+                    <!--autocomplete attribute reference: https://html.spec.whatwg.org/multipage/forms.html#inappropriate-for-the-control, WHAWTG, whatwg.org, accessed 11/08/2016-->
+                    <form name="order" action="#">
+                        <!--fieldset are used to style (class="form_box") and separate form sections-->
+                        <fieldset class="form_box" id="contact_details">
+                            <!--legends title each form fieldset to describe it's content or purpose-->
+                            <legend class="form_subtitle">Contact Details</legend>
+                                <!--Only one name field, following the HTML 5.2 specification recommandation @https://html.spec.whatwg.org/multipage/forms.html#inappropriate-for-the-control, accessed 11/08/2016-->
+                                <div class="form_row">
+                                    <!--labels describe the appropriate content of an input field.
+                                        "for" label specifies which input field is referred to by the label
+                                        in cases where the label does not surround the input element-->
+                                    <label class="form_field" for="contact_name"><strong>Full Name</strong></label>
+                                    <!--type specifies input type
+                                        class styles the input according to css
+                                        id is necessary for form submission
+                                        autocomplete HTML5 attribute helps users fill out online forms
+                                        required specifies that the form cannot be submitted if this field is left blank-->
+                                    <input type="text" class="form_field_input" id="contact_name" autocomplete="name" required/>
+                                </div>
+
+                                <div class="form_row">
+                                    <label class="form_field" for="contact_email" ><strong>Email</strong></label>
+                                    <input type="text" class="form_field_input" id="contact_email" autocomplete="email" required/>
+                                </div>
+
+                                <div class="form_row">
+                                    <label class="form_field" for="contact_phone" ><strong>Phone</strong></label>
+                                    <input type="tel" class="form_field_input" id="contact_phone" autocomplete="tel" required/>
+                                </div>
+                        </fieldset>
+                        
+                        <fieldset class="form_box" id="postage_details">
+                            <legend class="form_subtitle">Postage Details</legend>
+                                <div class="form_row">
+                                    <label class="form_field" for="postage_street_address"><strong>Street number and name</strong></label>
+                                    <!--textarea as per HTML5 specification on autocomplete with street-address-->
+                                    <textarea class="form_field_input" id="postage_street_address" autocomplete="shipping street-address" required></textarea>
+                                </div>
+
+                                <div class="form_row">
+                                    <div class="form_column">
+                                        <label class="form_field" for="postage_city" ><strong>City</strong></label>
+                                        <input type="text" class="form_field_input" id="postage_city" autocomplete="shipping address-level2" required/>
+                                    </div>
+                                    <div class="form_column">
+                                        <label class="form_field" for="postage_postcode"><strong>Postcode</strong></label>
+                                        <input type="text" class="form_field_input" id="postage_postcode" autocomplete="shipping postal-code" required/>
+                                    </div>
+                                </div>
+                                
+                                <!--Adapted from BookZone, Andrea Michele Torcasio, 2013, Order Page, 
+                                available at http://www.deakin.edu.au/~atorcasi/sit104/ass2/order.html, accessed 11/08/2016-->
+                                <div class="form_row">
+                                    <label class="form_field" for="postage_state" ><strong>State</strong></label>
+                                    <!--select state from a set of given options-->
+                                    <select class="form_field_input" id="postage_state" autocomplete="shipping address-level1" required>
+                                        <!--descriptive text to show when user has not yet selected anything-->
+                                        <option value="" disabled selected>Choose state</option>
+                                        <option>VIC</option>
+                                        <option>ACT</option>
+                                        <option>NSW</option>
+                                        <option>NT</option>
+                                        <option>QLD</option>
+                                        <option>SA</option>
+                                        <option>TAS</option>
+                                        <option>WA</option>
+                                    </select>
+                                </div>
+                        </fieldset>
+
+                        <fieldset class="form_box" id="cart_contents">
+                            <!--display cart contents NOT FUNCTIONAL-->
+                            <legend class="form_subtitle">Cart Overview</legend>
+                            <table class="cart_table">
+                                <thead>
+                                    <tr class="cart_title">
+                                        <th>Item pic</th>
+                                        <th>Product name</th>
+                                        <th>Unit price</th>
+                                        <th>Qty</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="details.html">
+                                                <img src="images/cart_thumb.gif" alt="" title="" style="border:0" class="cart_thumb" />
+                                            </a>
+                                        </td>
+                                        <td>Gift flowers</td>
+                                        <td>100$</td>
+                                        <td>1</td>
+                                        <td>100$</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a href="details.html">
+                                                <img src="images/cart_thumb.gif" alt="" title="" style="border:0" class="cart_thumb" />
+                                            </a>
+                                        </td>
+                                        <td>Gift flowers</td>
+                                        <td>100$</td>
+                                        <td>1</td>
+                                        <td>100$</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a href="details.html">
+                                                <img src="images/cart_thumb.gif" alt="" title="" style="border:0" class="cart_thumb" />
+                                            </a>
+                                        </td>
+                                        <td>Gift flowers</td>
+                                        <td>100$</td>
+                                        <td>1</td>
+                                        <td>100$</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="cart_total">
+                                            <span class="red">TOTAL SHIPPING:</span>
+                                        </td>
+                                        <td> 250$</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="4" class="cart_total">
+                                            <span class="red">TOTAL:</span>
+                                        </td>
+                                        <td> 325$</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </fieldset>
+                        
+                        <fieldset class="form_box" id="payment_details">
+                            <legend class="form_subtitle">Payment Details</legend>
+
+                            <div class="form_row">
+                                <label class="form_field" for="payment_card_number"><strong>Card number</strong></label>
+                                <input type="text" class="form_field_input" id="payment_card_number" autocomplete="cc-number" required />
+                            </div>
+
+                            <div class="form_row">
+                                <label class="form_field" for="payment_cardholder"><strong>Name on card</strong></label>
+                                <input type="text" class="form_field_input" id="payment_cardholder" autocomplete="cc-name" required/>
+                            </div>
+
+                            <!--Adapted from BookZone, Andrea Michele Torcasio, 2013, Order Page, 
+                            available at http://www.deakin.edu.au/~atorcasi/sit104/ass2/order.html, accessed 11/08/2016-->
+                            <div class="form_row">
+                                <!--split section into two for better form design, since input fields are small-->
+                                <div class="form_column">
+                                    <label class="form_field" for="payment_card_type"><strong>Card type</strong></label>
+                                    <select class="form_field_input" id="payment_card_type" autocomplete="cc-type" required>
+                                        <option value="" disabled selected>Choose card type</option>
+                                        <option>MasterCard</option>
+                                        <option>Visa</option>
+                                        <option>AMEX</option>
+                                    </select>
+                                </div>
+                                <div class="form_column">
+                                    <label class="form_field" for="payment_csc"><strong>Card CSC</strong></label>
+                                    <input type="text" class="form_field_input" id="payment_csc" autocomplete="cc-csc" required/>
+                                </div>
+                            </div>
+
+                            <!--fieldset within a fieldset, allowed according to HTML5 spec,
+                                used to group the date selectors together under one logical group-->
+                            <fieldset class="form_box" id="payment_card_expiration_date">
+                            <!--Adapted from BookZone, Andrea Michele Torcasio, 2013, Order Page, 
+                            available at http://www.deakin.edu.au/~atorcasi/sit104/ass2/order.html, accessed 11/08/2016-->
+                                <legend class="form_subtitle">Card Expiry Date</legend>
+                                <div class="form_row">
+                                    <div class="form_column">
+                                        <label class="form_field" for="payment_card_expiry_month"><strong>Expiry Month</strong></label>
+                                        <select id="payment_card_expiry_month" size="5" autocomplete="cc-exp-month">
+                                            <option value="" disabled selected>Choose expiry month</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                    <div class="form_column">
+                                        <label class="form_field" for="payment_card_expiry_year"><strong>Expiry Year</strong></label>
+                                        <select id="payment_card_expiry_year" size="5" autocomplete="cc-exp-year">
+                                            <option value="" disabled selected>Choose expiry year</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+
+                        <fieldset class="form_box" id="checkout">
+                            <legend class="form_subtitle">Checkout</legend>
+                            <div class="form_row">
+                                <label class="form_field" for="payment_notes"><strong>Notes</strong></label>
+                                <textarea class="form_field_input" id="payment_notes"></textarea>
+                            </div>
+
+                            <div class="form_row">
+                                <input type="submit" value="Place Order" class="form_submit" />
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+            <!--end of left content-->
+        
+            <div class="right_content">
+
+                <div class="languages_box">
+                    <span class="red">Languages:</span>
+                    <a href="#">
+                        <img src="images/au.gif" alt="" title="" style="border: 0; height:12px; width:15px;" />
+                    </a>
+                </div>
+
+                <div class="currency">
+                    <span class="red">Currency: </span>
+                    <a href="#" class="selected">AUD</a>
+                </div>
+
+                <div class="cart">
+                    <div class="title">
+                        <span class="title_icon">
+                                <img src="images/cart.gif" alt="" title="" />
+                        </span>My cart
+                    </div>
+
+                    <div class="home_cart_content">
+                        3 x items | <span class="red">TOTAL: 100$</span>
+                    </div>
+                    <div class="cart_actions">
+                        <a href="cart.html" class="view_cart">view cart</a>
+                        <a href="order.html" class="place_order">place order</a>
+                    </div>
+                </div>
+
+                <div class="title">
+                    <span class="title_icon">
+                            <img src="images/bullet3.gif" alt="" title="" />
+                    </span>About Our Shop
+                </div>
+
+                <div class="about">
+                    <p>
+                        <img src="images/about.gif" alt="" title="" class="right" /> Flowershop has quickly become renowned
+                        as one of Geelong's most prestigious and luxurious retail flower stores, and this has been successfully
+                        translated to our online flower shop. The same service, quality and range we provide to our retail
+                        shoppers is also extended to our online community.
+                        <!-- reference: Flower Temple, availalbe at <http://www.flowertemple.com.au/aboutflowertemple.aspx>, accessed 09/07/2013)-->
+                    </p>
+                </div>
+
+                <div class="right_box">
+
+                    <div class="title">
+                        <span class="title_icon">
+                                <img src="images/bullet5.gif" alt="" title="" />
+                        </span>Categories
+                    </div>
+
+                    <ul class="list">
+                        <li><a href="category.html">Flowers</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <!--end of right content-->
+
+            <div class="clear"></div>
+
+        </main>
+        <!--end of main-->
+
+        <footer>
+            <div class="left_footer">
+                <img src="images/footer_logo.gif" alt="" title="" /><br />
+                <a href="http://csscreme.com/freecsstemplates/" title="free templates">
+                    <img src="images/csscreme.gif" alt="free templates" title="free templates" style="border:0" />
+                </a>
+            </div>
+
+            <div class="right_footer">
+                <a href="ass1.html">home</a>
+                <a href="about.html">about us</a>
+                <a href="category.html">flowers</a>
+                
+                <a href="contact.html">contact us</a>
+            </div>
+
+            <aside id="deakinDisclaimer">
+            ©Deakin University, School of Information Technology. This web page has been developed as a student assignment for the unit SIT203: Web Programming. Therefore it is not part of the University's authorised web site. DO NOT USE THE INFORMATION CONTAINED ON THIS WEB PAGE IN ANY WAY.
+            </aside>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

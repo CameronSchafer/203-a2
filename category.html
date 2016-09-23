@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<!--"Catalog" page of FlowerShop.
+    Please refer back to this page for any comments on the main structure of the site
+    Refer to order.html for comments on pages using forms
+    All flower details and flower pictures are referenced in catalog.xml
+
+    In addition to HTML5 changes, nav bar changes, and right side changes, this page as been further modified as such:
+    - Added functionality of details.html
+        - Clicking on zoom under a picture will show the picture in full size
+        - Details of each flower is show, as well as link to cart
+    - Each flower is listed at the top with its picture and name
+        - both picture and name link to the flower details in the page
+    - Each flower is listed in a list form with picture and details
+        - link to top of the page and cart on each flower -->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Flower Shop</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <script src="./js/xml.js" type="text/javascript"></script>
+    <!--embedded javascript for THIS PAGE ONLY
+        applies catalog.xsl and catalog_icons.xsl to catalog.xml to display:
+        - a list of pictures of flowers and their names
+        - a list of flowers and all their details-->    
+    <script type="text/javascript">
+        window.onload = function() {
+            displayResult("./xml/catalog.xml", "./xml/catalog.xsl", "xmlCatalogOutput");
+            displayResult("./xml/catalog.xml", "./xml/catalog_icons.xsl", "xmlIconsOutput");
+        }
+    </script>
+    <!--stylesheet and javascript needed for the full size image to open when zoom is clicked-->
+    <link rel="stylesheet" href="./css/lightbox.css" type="text/css" media="screen" />
+    <script src="js/prototype.js" type="text/javascript"></script>
+    <script src="js/scriptaculous.js?load=effects" type="text/javascript"></script>
+    <script src="js/lightbox.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div id="wrap">
+
+        <header>
+
+            <div class="logo">
+                <a href="ass1.html">
+                    <img src="images/logo.gif" alt="" title="" style="border:0" />
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="ass1.html">home</a></li>
+                    <li><a href="about.html">about us</a></li>
+                    <li class="selected"><a href="category.html">flowers</a></li>
+                    <li><a href="myaccount.html">my account</a></li>
+                    <li><a href="register.html">register</a></li>
+                    <li><a href="contact.html">contact</a></li>
+                    <li><a href="search.html">search</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <main>
+
+            <div class="left_content">
+
+                <div class="crumb_nav">
+                    <a href="ass1.html">home</a> &gt;&gt; flowers
+                </div>
+
+                <div class="title">
+                    <span id="top" class="title_icon">
+                            <img src="images/bullet1.gif" alt="" title="" />
+                    </span>Flowers Catalog
+                </div>
+
+                <!--lists flower pictures and names from XML-->
+                <!--main comments on structure in catalog.xsl-->
+                <div class="new_products" id="xmlIconsOutput">
+                </div>
+                
+                <!--lists flowers and details from XML-->
+                <!--main comments on structure in catalog.xsl-->
+                <div id="xmlCatalogOutput">
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+            <!--end of left content-->
+
+            <div class="right_content">
+
+                <div class="languages_box">
+                    <span class="red">Languages:</span>
+                    <a href="#">
+                        <img src="images/au.gif" alt="" title="" style="border: 0; height:12px; width:15px;" />
+                    </a>
+                </div>
+
+                <div class="currency">
+                    <span class="red">Currency: </span>
+                    <a href="#" class="selected">AUD</a>
+                </div>
+
+                <div class="cart">
+                    <div class="title">
+                        <span class="title_icon">
+                                <img src="images/cart.gif" alt="" title="" />
+                        </span>My cart
+                    </div>
+
+                    <div class="home_cart_content">
+                        3 x items | <span class="red">TOTAL: 100$</span>
+                    </div>
+                    <div class="cart_actions">
+                        <a href="cart.html" class="view_cart">view cart</a>
+                        <a href="order.html" class="place_order">place order</a>
+                    </div>
+                </div>
+
+                <div class="title">
+                    <span class="title_icon">
+                            <img src="images/bullet3.gif" alt="" title="" />
+                    </span>About Our Shop
+                </div>
+
+                <div class="about">
+                    <p>
+                        <img src="images/about.gif" alt="" title="" class="right" /> Flowershop has quickly become renowned
+                        as one of Geelong's most prestigious and luxurious retail flower stores, and this has been successfully
+                        translated to our online flower shop. The same service, quality and range we provide to our retail
+                        shoppers is also extended to our online community.
+                        <!-- reference: Flower Temple, availalbe at <http://www.flowertemple.com.au/aboutflowertemple.aspx>, accessed 09/07/2013)-->
+                    </p>
+                </div>
+
+                <div class="right_box">
+
+                    <div class="title">
+                        <span class="title_icon">
+                                <img src="images/bullet5.gif" alt="" title="" />
+                        </span>Categories
+                    </div>
+
+                    <ul class="list">
+                        <li><a href="category.html">Flowers</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <!--end of right content-->
+
+            <div class="clear"></div>
+
+        </main>
+        <!--end of main-->
+
+        <footer>
+
+            <div class="left_footer">
+                <img src="images/footer_logo.gif" alt="" title="" /><br />
+                <a href="http://csscreme.com/freecsstemplates/" title="free templates">
+                    <img src="images/csscreme.gif" alt="free templates" title="free templates" style="border:0" />
+                </a>
+            </div>
+
+            <div class="right_footer">
+                <a href="ass1.html">home</a>
+                <a href="about.html">about us</a>
+                <a href="category.html">flowers</a>
+                
+                <a href="contact.html">contact us</a>
+            </div>
+
+            <aside id="deakinDisclaimer">
+                ©Deakin University, School of Information Technology. This web page has been developed as a student assignment for the unit
+                SIT203: Web Programming. Therefore it is not part of the University's authorised web site. DO NOT USE THE
+                INFORMATION CONTAINED ON THIS WEB PAGE IN ANY WAY.
+            </aside>
+        </footer>
+
+    </div>
+</body>
+
+</html>
