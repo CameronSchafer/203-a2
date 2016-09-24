@@ -33,19 +33,25 @@ seasons: Seasons.
 zone: Zone.
 --------------------------*/
 $countMatches = 10;
-$plantInfo = array();
+//$plantInfo = array();
 $incr = 0;
 $pregCheck = "/$keywords/i";
+$pregLight = "/$light/i";
+$seperator = "!@#$%%$#@!";
 
 while(oci_fetch_array($sqlSearch)){
-  $common = oci_result($sqlSearch,"COMMON");
-  $botan = oci_result($sqlSearch,"BOTAN");
-  $price = oci_result($sqlSearch,"PRICE");
-  $descrip = oci_result($sqlSearch,"DESCRIP");
-  $lightlevels = oci_result($sqlSearch,"LIGHTLEVELS");
-  $seasons = oci_result($sqlSearch,"SEASONS");
-  $zone = oci_result($sqlSearch,"ZONE");
-  $plantInfo[$incr] = $common . "||" . $botan . "||" . $price . "||" . $descrip . "||" . $lightlevels . "||" . $seasons . "||" . $zone;
+  $common[$incr] = oci_result($sqlSearch,"COMMON");
+  $botan[$incr] = oci_result($sqlSearch,"BOTAN");
+  $price[$incr] = oci_result($sqlSearch,"PRICE");
+  $picture[$incr] = oci_result($sqlSearch,"PICTURE");
+  $descrip[$incr] = oci_result($sqlSearch,"DESCRIP");
+  $lightLevels[$incr] = oci_result($sqlSearch,"LIGHTLEVELS");
+  $seasons[$incr] = oci_result($sqlSearch,"SEASONS");
+  $zone[$incr] = oci_result($sqlSearch,"ZONE");
+  $plantInfo[$incr] = $common[$incr] . $seperator . $botan[$incr] . $seperator . $price[$incr]
+  . $seperator . $picture[$incr] . $seperator . $descrip[$incr] . $seperator . $lightLevels[$incr]
+  . $seperator . $seasons[$incr] . $seperator . $zone[$incr];
+
   $incr++;
 }
 oci_close($connect);
@@ -54,30 +60,182 @@ $count = 0;
 $check = 0;
 $plantCheck = array();
 while($count < count($plantInfo)){
-  //echo $plantInfo[$count] . "<br>";
-  $keywordCheck = $plantInfo[$count];
-  //echo "<span style='color:red'>" . preg_match($pregCheck,$keywordCheck) . "</span><br><br>";
-  if(preg_match($pregCheck,$keywordCheck)){
-    $plantCheck[$check] = $keywordCheck;
-    $check++;
+  /*-------------------------
+  Check for Keyword, Light, Minimum Price & Maximum Price
+  --------------------------*/
+  if($light != "" && $minPrice > 0 && $maxPrice > 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if(preg_match($pregLight,$lightLevels[$count])){  //LightLevels Check.
+        if($minPrice < $price[$count] && $maxPrice > $price[$count]){   //Price Range Check.
+          $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+          $check++;
+        }
+      }
+    }
   }
-  $count++;
+  /*-------------------------
+  Check for Keyword, Light & Minimum Price.
+  --------------------------*/
+  else if($light != "" && $minPrice > 0 && $maxPrice == 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if(preg_match($pregLight,$lightLevels[$count])){  //LightLevels Check.
+        if($minPrice < $price[$count]){   //Price Range Check.
+          $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+          $check++;
+        }
+      }
+    }
+  }
+  /*-------------------------
+  Check for Keyword, Light & Maximum Price.
+  --------------------------*/
+  else if($light != "" && $minPrice == 0 && $maxPrice > 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if(preg_match($pregLight,$lightLevels[$count])){  //LightLevels Check.
+        if($maxPrice > $price[$count]){   //Price Range Check.
+          $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+          $check++;
+        }
+      }
+    }
+  }
+  /*-------------------------
+  Check for Keyword & Light.
+  --------------------------*/
+  else if($light != "" && $minPrice == 0 && $maxPrice == 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if(preg_match($pregLight,$lightLevels[$count])){  //LightLevels Check.
+        $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+        $check++;
+      }
+    }
+  }
+  /*-------------------------
+  Check for Keyword, Minimum Price & Maximum Price.
+  --------------------------*/
+  else if($light == "" && $minPrice > 0 && $maxPrice > 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if($minPrice < $price[$count] && $maxPrice > $price[$count]){
+        $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+        $check++;
+      }
+    }
+  }
+  /*-------------------------
+  Check for Keyword & Minimum Price.
+  --------------------------*/
+  else if($light == "" && $minPrice > 0 && $maxPrice == 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if($minPrice < $price[$count]){
+        $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+        $check++;
+      }
+    }
+  }
+  /*-------------------------
+  Check for Keyword & Maximum Price.
+  --------------------------*/
+  else if($light == "" && $minPrice == 0 && $maxPrice > 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      if($maxPrice > $price[$count]){
+        $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+        $check++;
+      }
+    }
+  }
+  /*-------------------------
+  Check for Keyword.
+  --------------------------*/
+  else if($light == "" && $minPrice == 0 && $maxPrice == 0){
+    if(preg_match($pregCheck,$plantInfo[$count])){    //Keyword Check.
+      $plantCheck[$check] = $plantInfo[$count];   //If plant passes all tests then it is saved to array.
+      $check++;
+    }
+  }
+  $count++; //Increments the variable count by 1 at the end of each loop.
 }
-$count = 0;
+
+/*-------------------------
+Print out the title Results.
+--------------------------*/
+echo "\n  <div class='title' id='results'>";
+echo "\n    <span class ='title_icon'>";
+echo "\n      <img src='images/bullet1.gif' />";
+echo "\n    </span>";
+echo "\n    Results";
+echo "\n  </div>";
+
+
+$count = 0;   //Set count to 0 for the print loop.
+/*-------------------------
+$plantResults Layout:
+$plantResults[0] = Common Name
+$plantResults[1] = Botanical Name
+$plantResults[2] = Price
+$plantResults[3] = Picture
+$plantResults[4] = Description
+$plantResults[5] = Light Levels
+$plantResults[6] = Seasons
+$plantResults[7] = Zones
+--------------------------*/
+$plantString = array();   //Sets the array to hold plant details.
+/*-------------------------
+Print out the plants that were found in the search.
+--------------------------*/
 while($count < count($plantCheck)){
-  echo "<span class='resp' style='color:blue'>" . $plantCheck[$count] . "</span><br class='resp'><br class='resp'>";
+  $plantResults = explode($seperator,$plantCheck[$count]);
+  $plantPrice = sprintf('%0.2f', $plantResults[2]);
+  echo "\n  <div class='feat_prod_box'>";
+  echo "\n    <div class='prod_img'>";
+  echo "\n      <img style='border:0' title='" . $plantResults[0] . "' alt='" . $plantResults[1] . "' src='./images/prod1.gif'/>";
+  echo "\n      <br><br>";
+  echo "\n      <a rel='lightbox' href='images/prod1.gif'>";
+  echo "\n        <img style='border:0' src='images/zoom.gif' />";
+  echo "\n      </a>";
+  echo "\n    </div>";
+  echo "\n    <div class='prod_det_box'>";
+  echo "\n      <div class='box_top'></div>";
+  echo "\n      <div class='box_center'>";
+  echo "\n        <div id='" . $plantResults[0] . "' class='prod_title'>$plantResults[0]</div>";
+  echo "\n        <div class='prod_subtitle'>$plantResults[1]</div>";
+  echo "\n        <p class='details'>$plantResults[4]</p>";
+  echo "\n        <br>";
+  echo "\n        <div>";
+  echo "\n          <strong style='margin-left:15px'>  Light Levels: </strong>";
+  echo "\n          <span>  $plantResults[5]</span>";
+  echo "\n        </div>";
+  echo "\n        <br>";
+  echo "\n        <div>";
+  echo "\n          <strong style='margin-left:15px'>  Seasons: </strong>";
+  echo "\n          <span>  $plantResults[6]</span>";
+  echo "\n        </div>";
+  echo "\n        <br>";
+  echo "\n        <div>";
+  echo "\n          <strong style='margin-left:15px'>  Hardiness Zones: </strong>";
+  echo "\n          <span>  $plantResults[7]</span>";
+  echo "\n        </div>";
+  echo "\n        <br>";
+  echo "\n        <div>";
+  echo "\n          <strong style='margin-left:15px'>  Price: </strong>";
+  echo "\n          <span class='red'>$$plantPrice</span>";
+  echo "\n        </div>";
+  echo "\n        <div class'clear'></div>";
+  echo "\n      </div>";
+  echo "\n      <div class='box_bottom'></div>";
+  echo "\n    </div>";
+  echo "\n    <div class'clear'></div>";
+  echo "\n  </div>";
   $count++;
 }
 
-if($light != ""){
+//echo "\n";
 
-
+/*-------------------------
+Print out that no plants were found with those search parameters.
+--------------------------*/
+if(count($plantCheck) == 0){
+  echo "\n<span class='resp'>No plants were found.</span>";
 }
-
-
-
-
-
 
 /*-------------------------
 Comment layout

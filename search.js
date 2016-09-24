@@ -8,8 +8,9 @@ Waits for page to load before script becomes active.
 $(document).ready(function (){
 
   function search(keywords,light,minPrice,maxPrice){
+    //console.log(light);
     $.post({
-      url: 'http://www.deakin.edu.au/~cschafer/ass2/search.php',
+      url: 'http://www.deakin.edu.au/~cschafer/ass2/php/search.php',
       data: {keywords:keywords, light:light, minPrice:minPrice, maxPrice:maxPrice}
     }).done(function(response){
       $('form').after(response);
@@ -41,8 +42,9 @@ $(document).ready(function (){
     //console.log("min = " + minPrice);
     maxPrice = $('#searchMaxPrice').val();
     //console.log("max = " + maxPrice);
-    $('.resp').remove();    //Removes any previously searched plants.
-    $('.error').remove();   //Removes the error if has been set.
+
+    $('.feat_prod_box').remove(); //Clears any previously searched plants.
+    $('.error').remove();   //Clears the error if has been set.
 
     if(keywords != ""){
       /*-------------------------
